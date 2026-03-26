@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: echolsfrench-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-echolsfrench}
+      MYSQL_USER: ${DB_USER:-echolsfrench}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-securepassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/db/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - echolsfrench-network
+
+  # Go Backend API
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: echolsfrench-api
+    restart: unless-stopped
+    environment:
+      PORT: 8080
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-echolsfrench}
+      DB_PASSWORD: ${DB_PASSWORD:-securepassword}
+      DB_NAME: ${DB_NAME:-echolsfrench}
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - echolsfrench-network
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: echolsfrench-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - echolsfrench-network
+
+networks:
+  echolsfrench-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
