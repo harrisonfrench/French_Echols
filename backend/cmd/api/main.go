@@ -45,6 +45,9 @@ func main() {
 
 		// Contact form
 		api.POST("/contact", h.CreateContact)
+
+		// AI agent inquiry form
+		api.POST("/ai-agent-inquiries", h.CreateAIAgentInquiry)
 	}
 
 	// Protected admin routes
@@ -63,6 +66,10 @@ func main() {
 		// Audit requests management
 		admin.GET("/audit-requests", h.GetAuditRequests)
 		admin.PUT("/audit-requests/:id", h.UpdateAuditRequest)
+
+		// AI agent inquiries management
+		admin.GET("/ai-agent-inquiries", h.GetAIAgentInquiries)
+		admin.PUT("/ai-agent-inquiries/:id", h.UpdateAIAgentInquiry)
 	}
 
 	// Get port from environment or default

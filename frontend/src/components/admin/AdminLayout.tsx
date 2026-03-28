@@ -1,13 +1,14 @@
 import { Navigate, Outlet, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { Button } from '@/components/ui/button'
-import { Users, FileText, LogOut, Home, BarChart3 } from 'lucide-react'
+import { Users, FileText, LogOut, Home, BarChart3, Bot } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   { name: 'Dashboard', href: '/admin', icon: BarChart3 },
   { name: 'Leads', href: '/admin/leads', icon: Users },
   { name: 'Audit Requests', href: '/admin/audit-requests', icon: FileText },
+  { name: 'AI Agent Inquiries', href: '/admin/ai-agents', icon: Bot },
 ]
 
 export function AdminLayout() {

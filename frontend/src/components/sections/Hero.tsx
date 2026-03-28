@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Bot } from "lucide-react"
 
 export function Hero() {
   return (
@@ -31,13 +32,28 @@ export function Hero() {
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-base px-8 py-6 rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-            Get a Free Website Audit
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-          <Button variant="outline" size="lg" className="text-base px-8 py-6 rounded-xl">
-            View Our Work
-          </Button>
+          <a href="#contact">
+            <Button size="lg" className="text-base px-8 py-6 rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all w-full">
+              Get a Free Website Audit
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </a>
+          <a href="#portfolio">
+            <Button variant="outline" size="lg" className="text-base px-8 py-6 rounded-xl w-full">
+              View Our Work
+            </Button>
+          </a>
+          <Link to="/ai-agents">
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-base px-8 py-6 rounded-xl"
+              style={{ borderColor: '#3b82f6', color: '#3b82f6' }}
+            >
+              Build an AI Agent
+              <Bot className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
 
         {/* Trust indicators */}

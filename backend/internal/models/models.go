@@ -60,6 +60,22 @@ type LoginResponse struct {
 	User  User   `json:"user"`
 }
 
+// AIAgentInquiry represents an AI agent interest form submission
+type AIAgentInquiry struct {
+	ID            int64     `json:"id"`
+	FullName      string    `json:"full_name" binding:"required"`
+	BusinessName  string    `json:"business_name" binding:"required"`
+	BusinessType  string    `json:"business_type" binding:"required"`
+	Challenge     string    `json:"challenge" binding:"required"`
+	ContactMethod string    `json:"contact_method" binding:"required"`
+	Email         string    `json:"email" binding:"required,email"`
+	Phone         string    `json:"phone,omitempty"`
+	Status        string    `json:"status"`
+	Notes         string    `json:"notes,omitempty"`
+	CreatedAt     time.Time `json:"created_at"`
+	UpdatedAt     time.Time `json:"updated_at"`
+}
+
 // LeadFilter represents query parameters for filtering leads
 type LeadFilter struct {
 	Status   string `form:"status"`

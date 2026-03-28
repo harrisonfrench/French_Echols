@@ -314,6 +314,95 @@ func (h *Handler) GetAuditRequests(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": requests})
 }
 
+// CreateAIAgentInquiry handles AI agent interest form submissions
+func (h *Handler) CreateAIAgentInquiry(c *gin.Context) {
+	var req models.AIAgentInquiry
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	req.Status = "new"
+	req.CreatedAt = time.Now()
+	req.UpdatedAt = time.Now()
+
+	result, err := h.db.Exec(`
+		INSERT INTO ai_agent_inquiries (full_name, business_name, business_type, challenge, contact_method, email, phone, status, created_at, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`, req.FullName, req.BusinessName, req.BusinessType, req.Challenge, req.ContactMethod, req.Email, req.Phone, req.Status, req.CreatedAt, req.UpdatedAt)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to submit inquiry"})
+		return
+	}
+
+	id, _ := result.LastInsertId()
+	req.ID = id
+
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Inquiry submitted successfully",
+		"data":    req,
+	})
+}
+
+// GetAIAgentInquiries returns all AI agent inquiries
+func (h *Handler) GetAIAgentInquiries(c *gin.Context) {
+	rows, err := h.db.Query(`
+		SELECT id, full_name, business_name, business_type, challenge, contact_method,
+			email, phone, status, notes, created_at, updated_at
+		FROM ai_agent_inquiries ORDER BY created_at DESC
+	`)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch inquiries"})
+		return
+	}
+	defer rows.Close()
+
+	var inquiries []models.AIAgentInquiry
+	for rows.Next() {
+		var inq models.AIAgentInquiry
+		err := rows.Scan(
+			&inq.ID, &inq.FullName, &inq.BusinessName, &inq.BusinessType, &inq.Challenge,
+			&inq.ContactMethod, &inq.Email, &inq.Phone, &inq.Status, &inq.Notes,
+			&inq.CreatedAt, &inq.UpdatedAt,
+		)
+		if err != nil {
+			continue
+		}
+		inquiries = append(inquiries, inq)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": inquiries})
+}
+
+// UpdateAIAgentInquiry updates an AI agent inquiry's status
+func (h *Handler) UpdateAIAgentInquiry(c *gin.Context) {
+	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid inquiry ID"})
+		return
+	}
+
+	var req models.AIAgentInquiry
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	req.UpdatedAt = time.Now()
+
+	_, err = h.db.Exec(`
+		UPDATE ai_agent_inquiries SET status = ?, notes = ?, updated_at = ? WHERE id = ?
+	`, req.Status, req.Notes, req.UpdatedAt, id)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update inquiry"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Inquiry updated successfully"})
+}
+
 // UpdateAuditRequest updates an audit request's status
 func (h *Handler) UpdateAuditRequest(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)

@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer"
 import { Hero } from "@/components/sections/Hero"
 import { Services } from "@/components/sections/Services"
 import { Portfolio } from "@/components/sections/Portfolio"
+import { About } from "@/components/sections/About"
 import { Contact } from "@/components/sections/Contact"
 
 export function HomePage() {
@@ -16,6 +17,9 @@ export function HomePage() {
         </section>
         <section id="portfolio">
           <Portfolio />
+        </section>
+        <section id="about">
+          <About />
         </section>
         <section id="contact">
           <Contact />

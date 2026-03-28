@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Mail, Phone, MapPin } from "lucide-react"
 
 export function Footer() {
@@ -43,24 +44,38 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-background/70">
               <li>
-                <a href="#services" className="text-sm hover:text-background transition-colors">
+                <a href="/#services" className="text-sm hover:text-background transition-colors">
                   Website Design
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-sm hover:text-background transition-colors">
+                <a href="/#services" className="text-sm hover:text-background transition-colors">
                   Website Redesign
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-sm hover:text-background transition-colors">
+                <a href="/#services" className="text-sm hover:text-background transition-colors">
                   Performance Optimization
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-sm hover:text-background transition-colors">
+                <a href="/#services" className="text-sm hover:text-background transition-colors">
                   Conversion Optimization
                 </a>
+              </li>
+              <li>
+                <Link
+                  to="/ai-agents"
+                  className="text-sm hover:text-background transition-colors flex items-center gap-2"
+                >
+                  AI Agents
+                  <span
+                    className="text-xs font-semibold px-1.5 py-0.5 rounded-full text-white"
+                    style={{ background: '#3b82f6' }}
+                  >
+                    NEW
+                  </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -70,22 +85,22 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-background/70">
               <li>
-                <a href="#portfolio" className="text-sm hover:text-background transition-colors">
+                <a href="/#portfolio" className="text-sm hover:text-background transition-colors">
                   Portfolio
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-sm hover:text-background transition-colors">
+                <a href="/#about" className="text-sm hover:text-background transition-colors">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-sm hover:text-background transition-colors">
+                <a href="/#contact" className="text-sm hover:text-background transition-colors">
                   Contact
                 </a>
               </li>
               <li>
-                <a href="#audit" className="text-sm hover:text-background transition-colors">
+                <a href="/#contact" className="text-sm hover:text-background transition-colors">
                   Free Audit
                 </a>
               </li>
@@ -98,14 +113,12 @@ export function Footer() {
           <p className="text-sm text-background/50">
             &copy; {currentYear} Echols & French. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="/privacy" className="text-sm text-background/50 hover:text-background/70 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="/terms" className="text-sm text-background/50 hover:text-background/70 transition-colors">
-              Terms of Service
-            </a>
-          </div>
+          <a
+            href="mailto:hello@echolsfrench.com"
+            className="text-sm text-background/50 hover:text-background/70 transition-colors"
+          >
+            hello@echolsfrench.com
+          </a>
         </div>
       </div>
     </footer>

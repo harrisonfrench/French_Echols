@@ -107,10 +107,12 @@ export function Portfolio() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="rounded-xl">
-            View All Projects
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <a href="#contact">
+            <Button variant="outline" size="lg" className="rounded-xl">
+              Start Your Project
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </a>
         </div>
       </div>
     </section>

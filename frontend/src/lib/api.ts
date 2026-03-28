@@ -39,6 +39,31 @@ interface ContactData {
   message: string
 }
 
+export interface AIAgentInquiry {
+  id: number
+  full_name: string
+  business_name: string
+  business_type: string
+  challenge: string
+  contact_method: 'email' | 'phone' | 'either'
+  email: string
+  phone?: string
+  status: 'new' | 'contacted' | 'qualified' | 'closed'
+  notes: string
+  created_at: string
+  updated_at: string
+}
+
+interface AIAgentInquiryData {
+  full_name: string
+  business_name: string
+  business_type: string
+  challenge: string
+  contact_method: string
+  email: string
+  phone?: string
+}
+
 interface ApiResponse<T> {
   message?: string
   data?: T
@@ -99,6 +124,12 @@ export const api = {
 
   healthCheck: () => request('/health'),
 
+  submitAIAgentInquiry: (data: AIAgentInquiryData) =>
+    request('/ai-agent-inquiries', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
   // Admin endpoints (require auth)
   admin: {
     // Leads
@@ -129,6 +160,15 @@ export const api = {
 
     updateAuditRequest: (id: number, data: Partial<AuditRequest>) =>
       request(`/admin/audit-requests/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      }, true),
+
+    // AI agent inquiries
+    getAIAgentInquiries: () => request<AIAgentInquiry[]>('/admin/ai-agent-inquiries', {}, true),
+
+    updateAIAgentInquiry: (id: number, data: Partial<AIAgentInquiry>) =>
+      request(`/admin/ai-agent-inquiries/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
       }, true),

@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Palette, RefreshCw, Zap, TrendingUp } from "lucide-react"
+import { Palette, RefreshCw, Zap, TrendingUp, Bot } from "lucide-react"
 
 const services = [
   {
@@ -59,6 +60,35 @@ export function Services() {
               </CardContent>
             </Card>
           ))}
+
+          {/* AI Agents card */}
+          <Link to="/ai-agents">
+            <Card className="group hover:shadow-lg hover:border-blue-400/40 transition-all duration-300 bg-background relative overflow-hidden cursor-pointer h-full">
+              <div className="absolute top-4 right-4">
+                <span
+                  className="text-xs font-semibold px-2.5 py-1 rounded-full text-white"
+                  style={{ background: '#3b82f6' }}
+                >
+                  NEW
+                </span>
+              </div>
+              <CardHeader>
+                <div
+                  className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:opacity-80 transition-colors"
+                  style={{ background: '#3b82f615' }}
+                >
+                  <Bot className="h-6 w-6" style={{ color: '#3b82f6' }} />
+                </div>
+                <CardTitle className="text-xl">AI Agents</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base leading-relaxed">
+                  Put your business on autopilot. AI agents handle calls, bookings, and lead
+                  qualification 24/7 — without adding headcount.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
       </div>
     </section>
