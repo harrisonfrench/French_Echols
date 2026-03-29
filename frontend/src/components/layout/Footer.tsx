@@ -95,6 +95,16 @@ export function Footer() {
                 </a>
               </li>
               <li>
+                <Link to="/team" className="text-sm hover:text-background transition-colors">
+                  Meet The Team
+                </Link>
+              </li>
+              <li>
+                <Link to="/website-grader" className="text-sm hover:text-background transition-colors">
+                  Free Website Grader
+                </Link>
+              </li>
+              <li>
                 <a href="/#contact" className="text-sm hover:text-background transition-colors">
                   Contact
                 </a>

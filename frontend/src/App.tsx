@@ -4,6 +4,9 @@ import { AuthProvider } from '@/context/AuthContext'
 // Public pages
 import { HomePage } from '@/pages/Home'
 import { AIAgentsPage } from '@/pages/AIAgents'
+import { MeetTheTeamPage } from '@/pages/MeetTheTeam'
+import { WebsiteGraderPage } from '@/pages/WebsiteGrader'
+import { TestimonialsAdminPage } from '@/pages/admin/Testimonials'
 
 // Admin pages
 import { LoginPage } from '@/pages/admin/Login'
@@ -21,6 +24,8 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<HomePage />} />
           <Route path="/ai-agents" element={<AIAgentsPage />} />
+          <Route path="/team" element={<MeetTheTeamPage />} />
+          <Route path="/website-grader" element={<WebsiteGraderPage />} />
 
           {/* Admin routes */}
           <Route path="/admin/login" element={<LoginPage />} />
@@ -29,6 +34,7 @@ function App() {
             <Route path="leads" element={<LeadsPage />} />
             <Route path="audit-requests" element={<AuditRequestsPage />} />
             <Route path="ai-agents" element={<AIAgentInquiriesPage />} />
+            <Route path="testimonials" element={<TestimonialsAdminPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

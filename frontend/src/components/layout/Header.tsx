@@ -8,9 +8,11 @@ interface HeaderProps {
 }
 
 const otherNavLinks = [
-  { name: "Portfolio", href: "/#portfolio" },
-  { name: "About", href: "/#about" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Portfolio", href: "/#portfolio", route: false },
+  { name: "About", href: "/#about", route: false },
+  { name: "Meet The Team", href: "/team", route: true },
+  { name: "Free Grader", href: "/website-grader", route: true },
+  { name: "Contact", href: "/#contact", route: false },
 ]
 
 export function Header({ variant = 'light' }: HeaderProps) {
@@ -93,15 +95,25 @@ export function Header({ variant = 'light' }: HeaderProps) {
               )}
             </div>
 
-            {otherNavLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`text-sm transition-colors ${textClass}`}
-              >
-                {link.name}
-              </a>
-            ))}
+            {otherNavLinks.map((link) =>
+              link.route ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`text-sm transition-colors ${textClass}`}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm transition-colors ${textClass}`}
+                >
+                  {link.name}
+                </a>
+              )
+            )}
           </nav>
 
           {/* CTA Button */}
@@ -164,16 +176,27 @@ export function Header({ variant = 'light' }: HeaderProps) {
                 )}
               </div>
 
-              {otherNavLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`font-medium transition-colors ${isDark ? 'text-white/80 hover:text-white' : 'text-foreground hover:text-primary'}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {otherNavLinks.map((link) =>
+                link.route ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`font-medium transition-colors ${isDark ? 'text-white/80 hover:text-white' : 'text-foreground hover:text-primary'}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={`font-medium transition-colors ${isDark ? 'text-white/80 hover:text-white' : 'text-foreground hover:text-primary'}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
               <a href="/#contact" className="block mt-4">
                 <Button className="w-full">Get Free Audit</Button>
               </a>

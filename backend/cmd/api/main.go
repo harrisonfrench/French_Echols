@@ -48,6 +48,13 @@ func main() {
 
 		// AI agent inquiry form
 		api.POST("/ai-agent-inquiries", h.CreateAIAgentInquiry)
+
+		// Live AI chat demo
+		api.POST("/chat", h.Chat)
+
+		// Testimonials (public read + submit)
+		api.GET("/testimonials", h.GetTestimonials)
+		api.POST("/testimonials", h.CreateTestimonial)
 	}
 
 	// Protected admin routes
@@ -70,6 +77,10 @@ func main() {
 		// AI agent inquiries management
 		admin.GET("/ai-agent-inquiries", h.GetAIAgentInquiries)
 		admin.PUT("/ai-agent-inquiries/:id", h.UpdateAIAgentInquiry)
+
+		// Testimonials management
+		admin.GET("/testimonials", h.AdminGetTestimonials)
+		admin.PUT("/testimonials/:id", h.AdminUpdateTestimonial)
 	}
 
 	// Get port from environment or default

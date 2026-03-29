@@ -10,6 +10,7 @@ import { TechStack } from "@/components/ai-agents/TechStack"
 import { TrustPillars } from "@/components/ai-agents/TrustPillars"
 import { FAQAccordion } from "@/components/ai-agents/FAQAccordion"
 import { AIAgentLeadForm } from "@/components/ai-agents/AIAgentLeadForm"
+import { ChatDemo } from "@/components/ai-agents/ChatDemo"
 
 export function AIAgentsPage() {
   return (
@@ -21,6 +22,7 @@ export function AIAgentsPage() {
         <WhatIsAnAgent />
         <UseCases />
         <ProcessSteps />
+        <ChatDemo />
         <PricingTiers />
         <TechStack />
         <TrustPillars />
