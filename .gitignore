@@ -40,6 +40,11 @@ coverage/
 *.temp
 .cache/
 
+# Nested project copies / local artifacts
+French_Echols/
+about/
+backend/api
+
 # Database
 *.sql.backup
 backend/scraper
