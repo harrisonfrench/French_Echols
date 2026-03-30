@@ -10,7 +10,6 @@ interface HeaderProps {
 const otherNavLinks = [
   { name: "Portfolio", href: "/#portfolio", route: false },
   { name: "About", href: "/#about", route: false },
-  { name: "Meet The Team", href: "/team", route: true },
   { name: "Free Grader", href: "/website-grader", route: true },
   { name: "Contact", href: "/#contact", route: false },
 ]

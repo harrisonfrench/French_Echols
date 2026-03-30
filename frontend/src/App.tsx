@@ -4,7 +4,7 @@ import { AuthProvider } from '@/context/AuthContext'
 // Public pages
 import { HomePage } from '@/pages/Home'
 import { AIAgentsPage } from '@/pages/AIAgents'
-import { MeetTheTeamPage } from '@/pages/MeetTheTeam'
+import { AboutPage } from '@/pages/About'
 import { WebsiteGraderPage } from '@/pages/WebsiteGrader'
 import { TestimonialsAdminPage } from '@/pages/admin/Testimonials'
 
@@ -14,6 +14,7 @@ import { DashboardPage } from '@/pages/admin/Dashboard'
 import { LeadsPage } from '@/pages/admin/Leads'
 import { AuditRequestsPage } from '@/pages/admin/AuditRequests'
 import { AIAgentInquiriesPage } from '@/pages/admin/AIAgentInquiries'
+import { ScraperPage } from '@/pages/admin/Scraper'
 import { AdminLayout } from '@/components/admin/AdminLayout'
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<HomePage />} />
           <Route path="/ai-agents" element={<AIAgentsPage />} />
-          <Route path="/team" element={<MeetTheTeamPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/website-grader" element={<WebsiteGraderPage />} />
 
           {/* Admin routes */}
@@ -33,6 +34,7 @@ function App() {
             <Route index element={<DashboardPage />} />
             <Route path="leads" element={<LeadsPage />} />
             <Route path="audit-requests" element={<AuditRequestsPage />} />
+            <Route path="scraper" element={<ScraperPage />} />
             <Route path="ai-agents" element={<AIAgentInquiriesPage />} />
             <Route path="testimonials" element={<TestimonialsAdminPage />} />
           </Route>

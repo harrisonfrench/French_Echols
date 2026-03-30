@@ -9,7 +9,7 @@ dev-frontend:
 	cd frontend && npm run dev
 
 dev-backend:
-	cd backend && go run ./cmd/api
+	cd backend && set -a && . ../.env && set +a && go run ./cmd/api
 
 dev-db:
 	docker-compose -f docker-compose.dev.yaml up -d
